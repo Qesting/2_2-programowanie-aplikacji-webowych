@@ -10,6 +10,21 @@
 
   const postForm = document.getElementById('post-form')
 
+  const loadingPopup = document.getElementById('loading-popup')
+  const loadingPopupCloseButton = document.getElementById('loading-popup-close')
+
+  function showLoadingPopup () {
+    loadingPopup.showModal()
+  }
+
+  function hideLoadingPopup() {
+    loadingPopup.close()
+  }
+
+  loadingPopupCloseButton.addEventListener('click', () => {
+    loadingPopup.close()
+  })
+
   example.addEventListener("click", function () {
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then(response => response.json())
@@ -21,8 +36,7 @@
 
   cw1.addEventListener("click", async function () {
     //DONE
-    answer.innerHTML = ''
-    answer.textContent = 'Loading...'
+    showLoadingPopup()
     const response = await fetch('https://jsonplaceholder.typicode.com/posts')
     const jsonArray = await response.json()
     const list = document.createElement('ul')
@@ -33,16 +47,18 @@
     }
     answer.innerHTML = ''
     answer.appendChild(list)
+    hideLoadingPopup()
   })
 
   cw1_3.addEventListener('click', async () => {
     const postId = postIdField.value
-    answer.innerHTML = ''
-    answer.textContent = 'Loading...'
+    showLoadingPopup()
     const response = await fetch('https://jsonplaceholder.typicode.com/posts/' + postId)
     const json = await response.json()
+    answer.innerHTML = ''
     answer.textContent = JSON.stringify(json)
     console.log(json)
+    hideLoadingPopup()
   })
 
   postForm.addEventListener('submit', async (event) => {
@@ -71,8 +87,7 @@
 
   cw2.addEventListener("click", async function () {
     // DONE
-    answer.innerHTML = ''
-    answer.textContent = 'Loading...'
+    showLoadingPopup()
     const response = await fetch('https://jsonplaceholder.typicode.com/posts')
     const jsonArray = await response.json()
     const table = document.createElement('table')
@@ -100,6 +115,7 @@
     table.append(thead, tbody)
     answer.innerHTML = ''
     answer.appendChild(table)
+    hideLoadingPopup()
   })
 
   cw3.addEventListener("click", function () {
