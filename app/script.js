@@ -42,6 +42,7 @@
     const response = await fetch('https://jsonplaceholder.typicode.com/posts/' + postId)
     const json = await response.json()
     answer.textContent = JSON.stringify(json)
+    console.log(json)
   })
 
   postForm.addEventListener('submit', async (event) => {
