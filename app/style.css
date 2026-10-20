@@ -2,3 +2,21 @@ html {
   height: 100%;
   width: 100%;
 }
+
+td {
+  text-align: justify;
+  vertical-align: top;
+}
+
+td:first-child {
+  color: red;
+}
+
+td:last-child {
+  color: green;
+}
+
+table, tr, td, th {
+  border: 1px solid black;
+  border-collapse: collapse;
+}

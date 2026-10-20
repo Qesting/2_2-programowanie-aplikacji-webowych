@@ -68,8 +68,37 @@
     answer.textContent = 'Dodano nowy post o ID ' + json['id']
   })
 
-  cw2.addEventListener("click", function () {
-    //TODO
+  cw2.addEventListener("click", async function () {
+    // DONE
+    answer.innerHTML = ''
+    answer.textContent = 'Loading...'
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+    const jsonArray = await response.json()
+    const table = document.createElement('table')
+
+    const thead = document.createElement('thead')
+    const thTitle = document.createElement('th')
+    thTitle.textContent = 'Title'
+    const thBody = document.createElement('th')
+    thBody.textContent = 'Content'
+    const row = document.createElement('tr')
+    row.append(thTitle, thBody)
+    thead.appendChild(row)
+
+    const tbody = document.createElement('tbody')
+
+    for (let index = 0; index < jsonArray.length; ++index) {
+      const row = document.createElement('tr')
+      const tdTitle = document.createElement('td')
+      tdTitle.textContent = jsonArray[index].title
+      const tdBody = document.createElement('td')
+      tdBody.textContent = jsonArray[index].body
+      row.append(tdTitle, tdBody)
+      tbody.appendChild(row)
+    }
+    table.append(thead, tbody)
+    answer.innerHTML = ''
+    answer.appendChild(table)
   })
 
   cw3.addEventListener("click", function () {
